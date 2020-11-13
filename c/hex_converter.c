@@ -56,27 +56,64 @@ char* hex_to_ascii(char* hex_string)
 }
 
 // Convert ascii character to a pair of hex characters
-char* convert_ascci_value(char* ascii_value)
-{
-	// TO BE COMPLETED
-	char* char_array = "";
-	return char_array;
+void convert_ascii_value(char ascii_value, char* hex_sub_array)
+{	
+	// Shift the bits in positions 5 - 8 to positions 1 - 4, disgard original values
+	int temp = ascii_value >> 4;
+
+	// Change the first bits in positions 5 - 8 to zero
+	int temp2 = ascii_value & ~(0b11110000);
+
+	// Loop through hex map
+	for(int i = 0; i < 16; i++)
+	{
+		// Match temp values to hex map
+		if(temp == hex_map[1][i])
+		{
+			// Store corresponding values in hex sub array
+			hex_sub_array[0] = hex_map[0][i];
+		}
+		// Match temp values to hex map
+		if(temp2 == hex_map[1][i])
+		{
+			// Store corresponding values in hex sub array
+			hex_sub_array[1] = hex_map[0][i];
+		}
+	}
 }
 
 //Convert an ASCII string to a hex string
 char* ascii_to_hex(char* ascii_string)
 {
-	// TO BE COMPLETED
+	// Get number of characters in string (note: strings are terminated by '/0' - not included in the count)
 	int str_len = strlen(ascii_string);
-	char* char_array = (char*)malloc(str_len / 2);
+	
+	// Create empty array to store converted value
+	char* char_array = (char*)calloc(1, (str_len * 2) + 1);
+
+	// Loop through all characters in ASCII string
+	for (int i = 0, j = 0; ascii_string[i] != '\0'; i++, j += 2)
+	{
+		// Convert each value to two hex values
+		convert_ascii_value(ascii_string[i], &char_array[j]);
+	}
+
+	// Add String terminator to the end of the array
+	char_array[str_len*2 + 1] = '\0';
+
 	return char_array;
 }
 
 // Main program turn on
 int main()
 {
-	// Hello World!
+	printf("Convert hex value: 48656c6c6f20576f726c6421 to ASCII\n");
 	char* string2 = "48656c6c6f20576f726c6421";
 	char* output = hex_to_ascii(string2);
-	printf("%s", output);	
+	printf("%s\n", output);	
+
+	printf("Convert ASCII value: 'Hello World!' to hex\n");
+	char* string3 = "Hello World!";
+	char* output3 = ascii_to_hex(string3);
+	printf("%s\n", output3);
 }
