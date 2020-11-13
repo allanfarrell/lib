@@ -25,19 +25,28 @@ int convert_hex_pair(char hex_one, char hex_two)
 {
 	unsigned int temp = 0;
 	int value1, value2;
+
+	// Through through hex map
 	for (int i = 0; i < 16; i++)
 	{
+		// Match hex values to hex map
 		if(tolower(hex_one) == hex_map[0][i])
 		{
+			// Store corresponding decimal values
 			value1 = hex_map[1][i];
 		}
+		// Match hex values to hex map
 		if(tolower(hex_two) == hex_map[0][i])
 		{
+			// Store corresponding decimal values
 			value2 = hex_map[1][i];
 		}
 	}
-		temp = (unsigned int) value1 << 4;
-		temp += (unsigned int) value2;
+
+	// Merge decimal values to get ASCII character
+	temp = (unsigned int) value1 << 4;
+	temp += (unsigned int) value2;
+
 	return temp;
 }
 
@@ -45,10 +54,14 @@ int convert_hex_pair(char hex_one, char hex_two)
 char* hex_to_ascii(char* hex_string)
 {
 	int str_len = strlen(hex_string);
-	char* char_array = (char*)malloc(str_len / 2);
+	
+	// Create empty array to store converted value
+	char* char_array = (char*)calloc(1, str_len / 2);
 
+	// Loop through pairs of values in hex string
 	for(int i = 0, j = 0; i < str_len; i += 2, j++)
 	{
+		// Convert two hex characters into a single ASCII character
 		char_array[j] = convert_hex_pair(hex_string[i], hex_string[i+1]);
 	}
 
