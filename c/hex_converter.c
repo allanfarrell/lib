@@ -1,14 +1,5 @@
-//	Convert HEX -> ASCII (int) -> String
-//	48656c6c6f20576f726c6421
-//	HEX -> ASCII (int)
-//		Map HEX value to int
-//		Concatenate values to ensure ASCII character		
-
-//	Convert String -> ASCII (int) -> HEX
-//	Hello world!
-//	String -> ASCII (int) by default
-//		Break down int into individul values i.e. 49 -> 4 / 9
-//		Map individual value to HEX
+#ifndef HEX_CONVERTER
+#define HEX_CONVERTER
 
 #include <stdio.h>
 #include <string.h>
@@ -117,16 +108,4 @@ char* ascii_to_hex(char* ascii_string)
 	return char_array;
 }
 
-// Main program turn on
-int main()
-{
-	printf("Convert hex value: 48656c6c6f20576f726c6421 to ASCII\n");
-	char* string2 = "48656c6c6f20576f726c6421";
-	char* output = hex_to_ascii(string2);
-	printf("%s\n", output);	
-
-	printf("Convert ASCII value: 'Hello World!' to hex\n");
-	char* string3 = "Hello World!";
-	char* output3 = ascii_to_hex(string3);
-	printf("%s\n", output3);
-}
+#endif
