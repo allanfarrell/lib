@@ -1,6 +1,3 @@
-#ifndef HEX_CONVERTER
-#define HEX_CONVERTER
-
 #include <stdio.h>
 #include <string.h>
 #include <cstdlib>
@@ -12,7 +9,7 @@ const int hex_map[2][16] = {
 };
 
 // Convert a pair of hex values into a ASCII character
-int convert_hex_pair(char hex_one, char hex_two)
+int convert_hex_pair(const char hex_one, const char hex_two)
 {
 	unsigned int temp = 0;
 	int value1, value2;
@@ -42,7 +39,7 @@ int convert_hex_pair(char hex_one, char hex_two)
 }
 
 // Convert a hex string into a ASCII string
-char* hex_to_ascii(char* hex_string)
+char* hex_to_ascii(const char* hex_string)
 {
 	int str_len = strlen(hex_string);
 	
@@ -60,7 +57,7 @@ char* hex_to_ascii(char* hex_string)
 }
 
 // Convert ascii character to a pair of hex characters
-void convert_ascii_value(char ascii_value, char* hex_sub_array)
+void convert_ascii_value(const char ascii_value, char* hex_sub_array)
 {	
 	// Shift the bits in positions 5 - 8 to positions 1 - 4, disgard original values
 	int temp = ascii_value >> 4;
@@ -87,7 +84,7 @@ void convert_ascii_value(char ascii_value, char* hex_sub_array)
 }
 
 //Convert an ASCII string to a hex string
-char* ascii_to_hex(char* ascii_string)
+char* ascii_to_hex(const char* ascii_string)
 {
 	// Get number of characters in string (note: strings are terminated by '/0' - not included in the count)
 	int str_len = strlen(ascii_string);
@@ -107,5 +104,3 @@ char* ascii_to_hex(char* ascii_string)
 
 	return char_array;
 }
-
-#endif
