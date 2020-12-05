@@ -4,7 +4,7 @@
 #include <ctype.h>
 #include "hex_converter.h"
 
-test_ascii_to_hex()
+void test_ascii_to_hex()
 {
 	printf("Convert ASCII value: 'Hello World!' to hex\n");
 	// Arrange
@@ -23,7 +23,7 @@ test_ascii_to_hex()
 	}
 }
 
-test_hex_to_ascii()
+void test_hex_to_ascii()
 {
 	printf("Convert hex value: 48656c6c6f20576f726c6421 to ASCII\n");
 	// Arrange
